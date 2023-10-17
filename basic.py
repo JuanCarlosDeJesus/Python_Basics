@@ -38,6 +38,7 @@ elif num1 < num2:
 else:
     print(f"{num1} is equal to {num2}")
 
+# Project Grade
 # Prompt user for score and display the letter grade
 grade = int(input("Enter your test score: "))
 
@@ -57,3 +58,69 @@ elif grade >= 60:
 else:
     print("Your grade is an F")
 
+# for loop
+fruits = ["apple", "banana", "cherry"]
+
+for fruit in fruits:
+    print(fruit)
+
+# using range - upto but not including the number
+for i in range(10):
+    print(i)
+# you can use start,stop and increment
+for i in range(1,11,2):
+    print(i)
+# for with if
+for i in range(1,11):
+    if i % 2 != 0:
+        print(i)
+
+# Project Fizzbuzz
+"""
+if # is div by 3, print fizz
+if # is div by 5, pritn buzz
+if # is div by 3 and 5, print fizzbuzz
+"""
+for i in range(100):
+    if i % 3 == 0:
+        if i % 5 == 0:
+            print("fizzbuzz")
+            continue
+        print("fizz")
+    elif i % 5 == 0:
+        print("buzz")
+    else:
+        print(i)
+# using and
+for i in range(100):
+    if i % 3 == 0 and i % 5 == 0:
+        print("fizzbuzz")
+    elif i % 3 == 0:
+        print("fizz")
+    elif i % 5 == 0:
+        print("buzz")
+    else:
+        print(i)
+# using a function
+def fizzbuzz(i):
+    if i % 3 == 0 and i % 5 == 0:
+        return print("fizzbuzz")
+    elif i % 3 == 0:
+        return print("fizz")
+    elif i % 5 == 0:
+        return print("buzz")
+    else:
+        return print(i)
+
+for i in range(100):
+    fizzbuzz(i)
+
+# Project function
+"""
+prompt a user for a name, pass it to a func and print the name
+"""
+def prntname(name):
+    return print("Hello " + name)
+
+name = input("What is your name? ")
+prntname(name)
