@@ -124,3 +124,22 @@ def prntname(name):
 
 name = input("What is your name? ")
 prntname(name)
+
+# Project Hangman challenge
+# Create a greeting
+print("Welcome to Hangman's puzzle!")
+# Create a word list
+words = ["hacker", "bounty", "random"]
+# Randomly choose a word from the list
+import random
+word = random.choice(words)
+print(word)
+# Ask user for a letter
+lttr = input("Enter a letter: ")
+# Turn input into lowercase
+lttr = lttr.lower()
+# check if letter in word
+if lttr in word:
+    print(f"{lttr} is correct")
+else:
+    print(f"{lttr} is wrong")
