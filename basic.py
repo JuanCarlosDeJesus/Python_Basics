@@ -133,13 +133,30 @@ words = ["hacker", "bounty", "random"]
 # Randomly choose a word from the list
 import random
 word = random.choice(words)
-print(word)
-# Ask user for a letter
-lttr = input("Enter a letter: ")
-# Turn input into lowercase
-lttr = lttr.lower()
-# check if letter in word
-if lttr in word:
-    print(f"{lttr} is correct")
-else:
-    print(f"{lttr} is wrong")
+print("You have 3 chances to win!")
+guess = []
+for i in (word):
+    # guess.append("_")
+    guess += '_'
+print(str(guess)[1:-1])
+count = 3
+while count >= 1:
+    # Ask user for a letter
+    lttr = input("Enter a letter: ")
+    # Turn input into lowercase
+    lttr = lttr.lower()
+    if lttr in word:
+        # Loop throughh word to check if letter in word
+        for i,l in enumerate(word):
+            if lttr == l:
+                guess[i] = l
+                print(str(guess)[1:-1])
+    else:
+        print(f"{lttr} is not present\nYou have {count - 1} more chances!")
+        count -= 1
+
+    if "_"  not in guess:
+        print(f"You guessed the word = {''.join(guess)}!")
+        break
+if count == 0:
+    print("You lose!")
