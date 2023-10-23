@@ -153,7 +153,7 @@ while not game_over:
                 guess[i] = l
                 print(str(guess)[1:-1])
     else:
-        print(f"{lttr} is not present\nYou have {count + 1} more chances!")
+        print(f"{lttr} is not present\nYou have {5 - (count + 1)} more chances!")
         if count == 5:
             print("You lose!")
             game_over = True
