@@ -36,15 +36,5 @@ def main():
     else:
         print("Invalid")
 
-# if __name__ == "__main__":
-#     main()
-
-main()
-
-# plates = input("Enter your vanity plate: ")
-# for _ in plates:
-#     if _ == "0" and _.isnumeric():
-#         print("Zero")
-#         break
-#     else:
-#         print("No Zero")
+if __name__ == "__main__":
+    main()
