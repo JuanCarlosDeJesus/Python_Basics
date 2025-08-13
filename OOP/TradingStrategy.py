@@ -5,9 +5,9 @@ class TradingStrategy:
         self.position = 0
 
     def Buy(self, price, quantity):
-        if self.amount >= price + quantity:
+        if self.amount >= price * quantity:
             self.position += quantity
-            self.amount -= price + quantity
+            self.amount -= price * quantity
             print(f"Successfully purchased {quantity} shares of {self.symbol} at ${price}")
         else:
             print("Not enough amount to proceed with the trade")
@@ -21,5 +21,5 @@ class TradingStrategy:
             print("Currently no shares to sell")
     
     def Status(self):
-        print(f"Current position {self.position} of shares")
-        print(f"Remaining Amount {self.amount}")
+        print(f"Current position {self.position} of {self.symbol} shares")
+        print(f"Remaining Amount ${self.amount}")
