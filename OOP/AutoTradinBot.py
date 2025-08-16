@@ -15,11 +15,22 @@ class AutoTradingBot:
         else:
             None
 
-    def evaluate_price():
-        pass
+    def evaluate_price(self):
+        latest_price = self.latest_price()
+        if latest_price < self.threshold:
+            return "Sell"
+        elif latest_price > self.threshold:
+            return "Buy"
+        else:
+            return "Hold"
 
-    def evaluate_trade():
-        pass
+    def evaluate_trade(self, action):
+        if self.evaluate_price() == "Sell" and self.position != "Short":
+            return "Sell trade has been executed and current position is 'Short'"
+        elif self.evaluate_price() == "Buy" and self.position != "Long":
+            return "Buy trade has been executed and current position is 'Long'"
+        elif self.evaluate_price() == "Hold":
+            return "The trade is on Hold for now and current position is 'Hold'"
 
     def run():
         pass
