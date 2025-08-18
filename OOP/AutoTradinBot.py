@@ -4,6 +4,16 @@ class AutoTradingBot:
         self.__position = None
         self.__price_data = []
 
+    def getattr(self):
+        return self._AutoTradingBot__threshold
+
+    def setattr(self, new_threshold):
+        if type(new_threshold) == int:
+            self._AutoTradingBot__threshold = new_threshold
+            return self._AutoTradingBot__threshold
+        else:
+            return "Enter an Integer."        
+
     def fetch_market_data(self):
         self.__price_data = [69140,69150,69160,69170,69180,69190]
         return self.__price_data
