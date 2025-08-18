@@ -1,5 +1,6 @@
 class AutoTradingBot:
-    def __init__(self, threshold):
+    def __init__(self, stock_name, threshold):
+        self.__stock_name = stock_name
         self.__threshold = threshold
         self.__position = None
         self.__price_data = []
