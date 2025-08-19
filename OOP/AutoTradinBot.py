@@ -1,7 +1,12 @@
 class AutoTradingBot:
+
+    # Static variable - access via class name
+    counter = 0
+
     def __init__(self, stock_name, threshold):
         self.__stock_name = stock_name
         self.__threshold = threshold
+        AutoTradingBot.counter += 1
         self.__position = None
         self.__price_data = []
 
