@@ -1,3 +1,6 @@
+from datetime import datetime
+
+
 class MyTradingStrategy:
     def __init__(self, name):
         self.__name = name
@@ -46,3 +49,33 @@ class MySmartTradingStrategy(MyTradingStrategy):
 
 # ObjStrat = MySmartTradingStrategy(3,5)
 # ObjStrat.generate_signal([1,2,3,4,5,6,7,8,9,10])
+# ObjStrat.lwindow
+# ObjStrat.swindow
+# ObjStrat.name
+
+
+class MyTrade:
+    def __init__(self, strategy_name, signal, amount):
+        self.__strategy_name = strategy_name
+        self.__signal = signal
+        self.__amount = amount
+        self.__timestamp = datetime.now()
+
+    def execute(self):
+        print(f"Executed {self.__signal} trade with the strategy {self.__strategy_name} with the amount ${self.__amount} at the tine {self.__timestamp}.")
+
+    @property
+    def strategy_name(self):
+        return self.__strategy_name
+
+    @property
+    def signal(self):
+        return self.__signal
+
+    @property
+    def amount(self):
+        return self.__amount
+
+    @property
+    def timestamp(self):
+        return self.__timestamp
