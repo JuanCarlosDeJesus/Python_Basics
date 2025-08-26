@@ -79,3 +79,21 @@ class MyTrade:
     @property
     def timestamp(self):
         return self.__timestamp
+
+
+# ObjStrat = MySmartTradingStrategy(3,5)
+# strategy_name = ObjStrat.name
+# signal = ObjStrat.generate_signal([1,2,3,4,5,6,7,8,9,10])
+# ObjMyTrade = MyTrade(strategy_name, signal, 10000)
+# ObjMyTrade.execute()
+
+# print(ObjMyTrade.strategy_name)
+# print(ObjMyTrade.signal)
+# print(ObjMyTrade.amount)
+# print(ObjMyTrade.timestamp)
+
+
+# Mock Trading API
+class MockTradingAPI:
+    def __init__(self, balance):
+        self.__balance = balance
