@@ -97,3 +97,27 @@ class MyTrade:
 class MockTradingAPI:
     def __init__(self, balance):
         self.__balance = balance
+
+    def place_order(self, trade, price):
+        if trade.signal == "Buy" and self.__balance >= trade.amount * price:
+            self.__balance -= trade.amount * price
+            print(f"Placed a but tae at the {price}, Remaining Balance: {self.__balance}")
+        elif trade.signal == "Sell":
+            self.__balance += trade.amount * price
+            print(f"Placed a sell trade at the price {price}, Remaining Balance: {self.__balance}")
+        else:
+            print("Insufficient Balance or Invalid Signal.")
+
+    
+    @property
+    def balance(self):
+        return self.__balance
+
+
+
+
+trade1 = MySmartTradingStrategy(3,5)
+trade1.generate_signal([1,2,3,4,5,4,3,2,1])
+trade2 = MyTrade(strategy_name, signal, 10000)
+ObjMockApi = MockTradingAPI(10000)
+ObjMockApi.place_order(trade2, 1000)
