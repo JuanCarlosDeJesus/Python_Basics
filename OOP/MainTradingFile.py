@@ -1,4 +1,6 @@
 from datetime import datetime
+import yfinance as yf
+import time
 
 
 class MyTradingStrategy:
@@ -83,7 +85,7 @@ class MyTrade:
 
 # ObjStrat = MySmartTradingStrategy(3,5)
 # strategy_name = ObjStrat.name
-# signal = ObjStrat.generate_signal([1,2,3,4,5,6,7,8,9,10])
+# signal = ObjStrat.generate_signal([1,2,3,4,5])
 # ObjMyTrade = MyTrade(strategy_name, signal, 10000)
 # ObjMyTrade.execute()
 
@@ -101,7 +103,7 @@ class MockTradingAPI:
     def place_order(self, trade, price):
         if trade.signal == "Buy" and self.__balance >= trade.amount * price:
             self.__balance -= trade.amount * price
-            print(f"Placed a but tae at the {price}, Remaining Balance: {self.__balance}")
+            print(f"Placed a buy trade at the {price}, Remaining Balance: {self.__balance}")
         elif trade.signal == "Sell":
             self.__balance += trade.amount * price
             print(f"Placed a sell trade at the price {price}, Remaining Balance: {self.__balance}")
@@ -115,9 +117,69 @@ class MockTradingAPI:
 
 
 
+# trade1 = MySmartTradingStrategy(3,5)
+# trade1.generate_signal([1,2,3,4,5,4,3,2,1])
+# trade2 = MyTrade(strategy_name, signal, 10000)
+# ObjMockApi = MockTradingAPI(10000)
+# ObjMockApi.place_order(trade2, 1000)
 
-trade1 = MySmartTradingStrategy(3,5)
-trade1.generate_signal([1,2,3,4,5,4,3,2,1])
-trade2 = MyTrade(strategy_name, signal, 10000)
-ObjMockApi = MockTradingAPI(10000)
-ObjMockApi.place_order(trade2, 1000)
+
+# Finance data aggregator
+class MyTradingSystem:
+    def __init__(self, api, strategy, symbol):
+        self.__api = api
+        self.__strategy = strategy
+        self.__symbol = symbol
+        self.__price_data = []
+    
+    def fetch_price_data(self):
+        data = yf.download(tickers = self.__symbol, period = '1d', interval = '1m')
+        if not data.empty:
+            price = data['Close'].iloc[-1]
+            self.__price_data.append(price)
+            if len(self.__price_data) > self.__strategy.lwindow:
+                self.__strategy.lwindow.pop(0)
+                print(f"Fetched new price data: {price}")
+            else:
+                print("No data fetched")
+
+    def run(self):
+        self.fetch_price_data()
+        signal = self.__strategy.generate_signal(self.__price_data)
+        print(f"Generated Signal: {signal}")
+        if signal in ['Sell', 'Buy']:
+            trade = MyTrade(self.__strategy.signal, 1)
+            trade.execute()
+            self.__api.place_order(trade, self.__price_date[-1])
+
+    @property
+    def api(self):
+        return self.__api
+
+    @property
+    def strategy(self):
+        return self.__strategy
+
+    @property
+    def symbol(self):
+        return self.__symbol
+
+    @property
+    def balance(self):
+        return self.__price_data
+
+
+
+
+# data = yf.download(tickers = "AAPL", period = '1d', interval = '1m')
+# data['Close'].iloc[-1]
+
+symbol = "AAPL"
+api = MockTradingAPI(balance = 10000)
+strategy = MySmartTradingStrategy(3, 5)
+system = MyTradingSystem(api, strategy, symbol)
+
+for _ in range(3):
+    system.run()
+    print(f"Remaining balance: {api.balance}")
+    time.sleep(2)
