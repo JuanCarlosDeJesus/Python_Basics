@@ -98,3 +98,24 @@ with open('trades.csv', 'r') as f:
     tradereader = csv.reader(f)
     for row in tradereader:
         print(row)
+
+# using .tell() - shows current index position of cursor
+# using .seek() - moves cursor to new index position
+with open('trades.txt', 'r') as f:
+    print(f.read())
+    print(f.tell())  # shows current index position
+    f.seek(3)  # moves index to new position
+    print(f.read())
+
+# reading binary files - 'b' (images, audio...)
+# use 'rb' and 'wb'
+# use PIL - Pillow module to display image
+# use IPython.display to display image
+with open('screenshot.png', 'rb') as f:
+    print(f.read())  # displays as ASCII char
+
+from PIL import Image 
+from IPython.display import display
+img = Image.open('screenshot.png')
+img.show()
+display(img)
