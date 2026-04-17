@@ -37,14 +37,14 @@ class LinkedList:
     def append(self, data):
         new_node = Node(data)  # Create a new node with the given data
         cur = self.head  # Start from the head
-        while cur.next!=None:  # Traverse to the end of the list
+        while cur.next is not None:  # Traverse to the end of the list
             cur = cur.next
         cur.next = new_node  # Set the next reference of the last node to the new node
 
     def length(self):
         count = 0
         cur = self.head  # Start from the head
-        while cur.next!=None:  # Traverse through the list
+        while cur.next is not None:  # Traverse through the list
             count += 1  # Increment the count for each node
             cur = cur.next  # Move to the next node
         return count  # Return the total count of nodes in the list
@@ -52,10 +52,36 @@ class LinkedList:
     def display(self):
         elems = []
         cur_node = self.head  # Start from the head
-        while cur_node.next!=None:  # Traverse through the list
+        while cur_node.next is not None:  # Traverse through the list
             cur_node = cur_node.next  # Move to the next node
             elems.append(cur_node.data)  # Append the data of the current node to the list
         print(elems) # Return the list of elements
+
+    def get(self, index):
+        if index >= self.length():  # Check if the index is out of bounds
+            print("Index out of bounds")
+            return None
+        cur_idx = 0
+        cur_node = self.head  # Start from the head
+        while True:  # Traverse through the list until the desired index is reached
+            cur_node = cur_node.next  # Move to the next node
+            if cur_idx == index:  # Check if the current index matches the desired index
+                return cur_node.data  # Return the data of the current node
+            cur_idx += 1  # Increment the current index
+
+    def erase(self, index):
+        if index >= self.length():  # Check if the index is out of bounds
+            print("Index out of bounds")
+            return
+        cur_idx = 0
+        cur_node = self.head  # Start from the head
+        while True:  # Traverse through the list until the desired index is reached
+            last_node = cur_node  # Keep track of the last node
+            cur_node = cur_node.next  # Move to the next node
+            if cur_idx == index:  # Check if the current index matches the desired index
+                last_node.next = cur_node.next  # Update the next reference of the last node to skip the current node
+                return
+            cur_idx += 1  # Increment the current index
 
 # Example usage
 sll = LinkedList()
@@ -64,4 +90,11 @@ sll.display()
 
 sll.append(1)
 sll.append(2)
+sll.append(3)
+sll.append(4)
 sll.display()  # Output: []
+
+print("The value at index 0 is:", sll.get(0))  # Output: 1
+print("Erasing the value at index 0 ", sll.get(0))
+sll.erase(0)
+sll.display()  # Output: [2]
