@@ -4,24 +4,41 @@
 # objects behave with built-in operations, such as addition, 
 # string representation, and more.
 
-class DunderMagic:
-    def __init__(self, x, y):  # Use to construct and initialize an instance of an object
+
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def __del__(self):
+        print("You are being Deconstructed!")
+
+p = Person("Carl", 55)
+p.__del__()
+
+print(p)
+
+# Operator overload
+class Vector:
+    def __init__(self, x, y):
         self.x = x
         self.y = y
 
-    def __str__(self):  # Use to define the string representation of an object
-        return f"DunderMagic(x={self.x}, y={self.y})"
+    def __add__(self, other):
+        return Vector(self.x + other.x, self.y + other.y)
+
+    def __repr__(self):
+        return f"X = {self.x}, Y = {self.y}"
+
+    def __call__(self):
+        return "I wuz called!"
 
 
-# __add__ is used to define the behavior of the addition operator (+) for instances of the class.
-str1 = "Hello, "
-str2 = "world!"
-
-result = str1 + str2  # This will call the __add__ method of the str class
-result = str1.__add__(str2)  # This is equivalent to the above line
-
-# __len__ is used to define the behavior of the len() function for instances of the class.
-my_list = [1, 2, 3, 4, 5]
-length = len(my_list)  # This will call the __len__ method of the list class
-length = my_list.__len__()  # This is equivalent to the above line
+v1 = Vector(1,2)
+v2 = Vector(3,4)
+v3 = v1 + v2
+ 
+print(v3.x, v3.y)  # overloading __add__ allows you to + object. you can do mult ond others
+print(v3)  # activated by __repr__. you can also use __str__
+v3()  # activated by __call__
 
