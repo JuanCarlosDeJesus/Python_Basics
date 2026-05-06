@@ -1,0 +1,1 @@
+# Singleton pattern implementation for a payment gateway
