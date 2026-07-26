@@ -16,7 +16,7 @@ print(squared_numbers)
 # using list comprehension to square the numbers
 squared_numbers_comp = [square(n) for n in numbers] 
 
-print(squared_numbers)
+print(squared_numbers_comp)
 
 # square list with map function
 squared_numbers_map = map(square, numbers)
